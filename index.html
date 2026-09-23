@@ -272,9 +272,12 @@
                                     class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-600 mb-1">ค่าอาหารวันละ 40 บาท (ได้เฉพาะวันทำงาน) </label>
-                                <input type="number" id="mealAllowance" value="0" min="0" oninput="calculateAll()"
-                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
+                                <label class="block text-xs font-medium text-slate-600 mb-1">ค่าอาหารวันละ 40 บาท (จำนวนวันทำงาน)</label>
+                                <div class="relative">
+                                    <input type="number" id="mealDays" value="26" min="0" max="31" oninput="calculateAll()"
+                                        class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
+                                    <span class="text-xs text-slate-400 absolute right-3 top-2 font-normal">วัน</span>
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 mb-1">OIP-รายได้อื่นๆ (บาท)</label>
@@ -436,7 +439,7 @@
                                         <span id="sumDiligence" class="font-semibold text-slate-800">0.00</span>
                                     </div>
                                     <div class="flex justify-between text-slate-600">
-                                        <span>ค่าอาหาร</span>
+                                        <span>ค่าอาหาร <span id="sumMealDaysCount" class="text-xs text-slate-400"></span></span>
                                         <span id="sumMeal" class="font-semibold text-slate-800">0.00</span>
                                     </div>
                                     <div class="flex justify-between text-slate-600">
@@ -613,7 +616,8 @@
 
             // 5. Allowances
             const diligenceAllowance = getInputValue('diligenceAllowance');
-            const mealAllowance = getInputValue('mealAllowance');
+            const mealDays = getInputValue('mealDays');
+            const mealAllowance = mealDays * 40; // คำนวณค่าอาหาร: จำนวนวัน x 40 บาท
             const otherIncome = getInputValue('otherIncome');
 
             // Total Gross Income
@@ -676,6 +680,7 @@
             document.getElementById('sumOt30Pay').innerText = formatNum(ot30Pay);
 
             document.getElementById('sumDiligence').innerText = formatNum(diligenceAllowance);
+            document.getElementById('sumMealDaysCount').innerText = `(${mealDays} วัน)`;
             document.getElementById('sumMeal').innerText = formatNum(mealAllowance);
             document.getElementById('sumOtherIncome').innerText = formatNum(otherIncome);
 
@@ -705,7 +710,7 @@
             document.getElementById('ot30Hours').value = 0;
 
             document.getElementById('diligenceAllowance').value = 800;
-            document.getElementById('mealAllowance').value = 0;
+            document.getElementById('mealDays').value = 26;
             document.getElementById('otherIncome').value = 0;
 
             document.getElementById('autoSocialSecurity').checked = true;
