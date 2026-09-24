@@ -204,16 +204,30 @@
                     </div>
                 </div>
 
-                <!-- 3. ชั่วโมงการทำงาน OT -->
+                <!-- 3. ชั่วโมงการทำงาน OT (ปรับปรุงใหม่) -->
                 <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm transition hover:shadow-md">
-                    <div class="flex items-center space-x-2 mb-4 pb-2 border-b border-slate-100">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-business-time"></i>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-2 border-b border-slate-100">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-business-time"></i>
+                            </div>
+                            <h2 class="text-lg font-bold text-slate-800">3. การทำงานล่วงเวลา (OT)</h2>
                         </div>
-                        <h2 class="text-lg font-bold text-slate-800">3. ชั่วโมงการทำงานล่วงเวลา (OT)</h2>
+                        <!-- ปุ่มเลือกคำนวณเป็น ชั่วโมง หรือ วัน -->
+                        <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200/80 self-start sm:self-auto">
+                            <button id="modeHoursBtn" type="button" onclick="setOtMode('hours')"
+                                class="px-3 py-1 text-xs font-semibold rounded-lg transition bg-white text-emerald-600 shadow-sm">
+                                <i class="fa-regular fa-clock mr-1"></i> ระบุเป็นชั่วโมง
+                            </button>
+                            <button id="modeDaysBtn" type="button" onclick="setOtMode('days')"
+                                class="px-3 py-1 text-xs font-semibold rounded-lg transition text-slate-500 hover:text-slate-700">
+                                <i class="fa-regular fa-calendar-days mr-1"></i> ระบุเป็นวัน
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- แสดงเมื่อเลือกโหมดคำนวณเป็น "ชั่วโมง" -->
+                    <div id="otHoursContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <!-- OT วันปกติ -->
                         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/60">
                             <label class="block text-xs font-bold text-slate-700 mb-1">OT วันปกติ (1.5 เท่า)</label>
@@ -227,10 +241,10 @@
 
                         <!-- OT วันหยุด 1x -->
                         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/60">
-                            <label class="block text-xs font-bold text-slate-700 mb-1">OT วันหยุด (1 เท่า)</label>
+                            <label class="block text-xs font-bold text-blue-600 mb-1">OT วันหยุด (1 เท่า)</label>
                             <p class="text-[11px] text-slate-500 mb-2">อัตรา: <span id="ot10RateText" class="font-semibold text-emerald-600">0.00</span> ฿/ชม.</p>
                             <div class="relative">
-                                <input type="number" id="ot10Hours" value="9" min="0" step="0.5" oninput="calculateAll()"
+                                <input type="number" id="ot10Hours" value="0" min="0" step="0.5" oninput="calculateAll()"
                                     class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-red-500 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                                 <span class="text-xs text-slate-400 absolute right-2.5 top-2.5 font-normal">ชม.</span>
                             </div>
@@ -238,12 +252,37 @@
 
                         <!-- OT วันหยุด 3x -->
                         <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/60">
-                            <label class="block text-xs font-bold text-slate-700 mb-1">OT วันหยุด (3 เท่า)</label>
+                            <label class="block text-xs font-bold text-blue-600 mb-1">OT วันหยุด (3 เท่า)</label>
                             <p class="text-[11px] text-slate-500 mb-2">อัตรา: <span id="ot30RateText" class="font-semibold text-emerald-600">0.00</span> ฿/ชม.</p>
                             <div class="relative">
-                                <input type="number" id="ot30Hours" value="3" min="0" step="0.5" oninput="calculateAll()"
+                                <input type="number" id="ot30Hours" value="0" min="0" step="0.5" oninput="calculateAll()"
                                     class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-red-500 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                                 <span class="text-xs text-slate-400 absolute right-2.5 top-2.5 font-normal">ชม.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- แสดงเมื่อเลือกโหมดคำนวณเป็น "วัน" -->
+                    <div id="otDaysContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden">
+                        <!-- OT วันปกติ (วัน) -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200/60 space-y-1">
+                            <label class="block text-xs font-bold text-slate-700">OT วันปกติ 1.5 เท่า (ทำวันละ 3 ชม.)</label>
+                            <p class="text-[11px] text-slate-500">1 วัน = 3 ชั่วโมง</p>
+                            <div class="relative pt-1">
+                                <input type="number" id="otNormalDays" value="0" min="0" step="0.5" oninput="calculateAll()"
+                                    class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-red-500 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                <span class="text-xs text-slate-400 absolute right-2.5 top-3.5 font-normal">วัน</span>
+                            </div>
+                        </div>
+
+                        <!-- OT วันหยุด (วัน) -->
+                        <div class="p-3.5 bg-blue-50/40 rounded-xl border border-blue-100 space-y-1">
+                            <label class="block text-xs font-bold text-blue-700">OT วันหยุด 12 ชม. (แยก 1x 9ชม. + 3x 3ชม.)</label>
+                            <p class="text-[11px] text-blue-500">1 วัน = (1x × 9 ชม.) + (3x × 3 ชม.)</p>
+                            <div class="relative pt-1">
+                                <input type="number" id="otHolidayDays" value="0" min="0" step="0.5" oninput="calculateAll()"
+                                    class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-red-500 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                <span class="text-xs text-slate-400 absolute right-2.5 top-3.5 font-normal">วัน</span>
                             </div>
                         </div>
                     </div>
@@ -499,6 +538,9 @@
     </main>
 
     <script>
+        // OT Mode Variable ('hours' or 'days')
+        let otInputMode = 'hours';
+
         // Set Current Date in Payslip
         document.getElementById('currentDateText').innerText = new Date().toLocaleDateString('th-TH', {
             year: 'numeric',
@@ -520,6 +562,30 @@
             if (!el) return 0;
             const val = parseFloat(el.value);
             return isNaN(val) ? 0 : val;
+        }
+
+        // Function to switch OT Mode
+        function setOtMode(mode) {
+            otInputMode = mode;
+            const hoursContainer = document.getElementById('otHoursContainer');
+            const daysContainer = document.getElementById('otDaysContainer');
+            const modeHoursBtn = document.getElementById('modeHoursBtn');
+            const modeDaysBtn = document.getElementById('modeDaysBtn');
+
+            if (mode === 'hours') {
+                hoursContainer.classList.remove('hidden');
+                daysContainer.classList.add('hidden');
+                
+                modeHoursBtn.className = "px-3 py-1 text-xs font-semibold rounded-lg transition bg-white text-emerald-600 shadow-sm";
+                modeDaysBtn.className = "px-3 py-1 text-xs font-semibold rounded-lg transition text-slate-500 hover:text-slate-700";
+            } else {
+                hoursContainer.classList.add('hidden');
+                daysContainer.classList.remove('hidden');
+                
+                modeDaysBtn.className = "px-3 py-1 text-xs font-semibold rounded-lg transition bg-white text-emerald-600 shadow-sm";
+                modeHoursBtn.className = "px-3 py-1 text-xs font-semibold rounded-lg transition text-slate-500 hover:text-slate-700";
+            }
+            calculateAll();
         }
 
         // Handle working days select dropdown
@@ -611,10 +677,26 @@
             const nightShiftRate = getInputValue('nightShiftRate');
             const totalNightShiftPay = nightShiftDays * nightShiftRate;
 
-            // 4. OT Calculations
-            const ot15Hours = getInputValue('ot15Hours');
-            const ot10Hours = getInputValue('ot10Hours');
-            const ot30Hours = getInputValue('ot30Hours');
+            // 4. OT Calculations (ปรับปรุงรองรับโหมด "วัน" และ "ชั่วโมง")
+            let ot15Hours = 0;
+            let ot10Hours = 0;
+            let ot30Hours = 0;
+
+            if (otInputMode === 'hours') {
+                ot15Hours = getInputValue('ot15Hours');
+                ot10Hours = getInputValue('ot10Hours');
+                ot30Hours = getInputValue('ot30Hours');
+            } else {
+                // คำนวณแบบระบุจำนวนวัน:
+                // 1 วัน OT วันปกติ = 3 ชม. (1.5x)
+                // 1 วัน OT วันหยุด = 9 ชม. (1x) + 3 ชม. (3x)
+                const otNormalDays = getInputValue('otNormalDays');
+                const otHolidayDays = getInputValue('otHolidayDays');
+
+                ot15Hours = otNormalDays * 3;
+                ot10Hours = otHolidayDays * 9;
+                ot30Hours = otHolidayDays * 3;
+            }
 
             const ot15Pay = ot15Hours * ot15Rate;
             const ot10Pay = ot10Hours * ot10Rate;
@@ -702,7 +784,7 @@
             document.getElementById('sumOtherDeductions').innerText = formatNum(otherDeductions);
         }
 
-        // Reset All Values to Defaults (แก้ไขแล้ว)
+        // Reset All Values to Defaults
         function resetCalculator() {
             document.getElementById('baseSalary').value = 25000;
             document.getElementById('workingDaysSelect').value = '26';
@@ -719,9 +801,13 @@
             document.getElementById('nightShiftDays').value = 0;
             document.getElementById('nightShiftRate').value = 55;
 
+            // Reset OT values
             document.getElementById('ot15Hours').value = 0;
-            document.getElementById('ot10Hours').value = 9;
-            document.getElementById('ot30Hours').value = 3;
+            document.getElementById('ot10Hours').value = 0;
+            document.getElementById('ot30Hours').value = 0;
+            document.getElementById('otNormalDays').value = 0;
+            document.getElementById('otHolidayDays').value = 0;
+            setOtMode('hours');
 
             document.getElementById('diligenceAllowance').value = 800;
             document.getElementById('mealDays').value = 26;
