@@ -439,11 +439,14 @@
                         <div class="p-6 space-y-4 max-h-[480px] overflow-y-auto">
 
                             <!-- Section: Gross Earnings -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                                    <span>รายการรายรับ (Earnings)</span>
-                                    <span class="text-emerald-600 font-bold" id="totalEarningsDisplay">+0.00</span>
-                                </div>
+                        <div>
+                        <!-- ปรับตรงนี้เป็น text-sm เพื่อให้ข้อความ "รายการรายรับทั้งหมด" ใหญ่ขึ้นมาอีกนิด -->
+                            <div class="flex justify-between items-center text-sm font-bold text-slate-500 uppercase tracking-wider mb-2">
+                            <span>รายการรายรับทั้งหมด (Earnings)</span>
+                        <!-- เพิ่ม text-lg เพื่อให้ตัวเลข +0.00 มีขนาดใหญ่เด่นชัด -->
+                            <span class="text-emerald-600 font-bold text-lg" id="totalEarningsDisplay">+0.00</span>
+                            </div>    
+							
                                 <div class="space-y-1.5 text-sm">
                                     <div class="flex justify-between text-slate-600">
                                         <span>เงินเดือนพื้นฐาน</span>
@@ -498,7 +501,7 @@
                             <!-- Section: Deductions -->
                             <div>
                                 <div class="flex justify-between items-center text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                                    <span>รายการหัก (Deductions)</span>
+                                    <span>รายการหักทั้งหมด (Deductions)</span>
                                     <span class="text-rose-600 font-bold" id="totalDeductionsDisplay">-0.00</span>
                                 </div>
                                 <div class="space-y-1.5 text-sm">
