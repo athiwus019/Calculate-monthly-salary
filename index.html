@@ -271,14 +271,24 @@
                                 <input type="number" id="diligenceAllowance" value="800" min="0" oninput="calculateAll()"
                                     class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
                             </div>
-                            <div>
-                                <label class="block text-xs font-medium text-slate-600 mb-1">ค่าอาหารวันละ 40 บาท (จำนวนวันทำงาน)</label>
-                                <div class="relative">
-                                    <input type="number" id="mealDays" value="26" min="0" max="31" oninput="calculateAll()"
-                                        class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
-                                    <span class="text-xs text-slate-400 absolute right-3 top-2 font-normal">วัน</span>
+                            
+                            <!-- ปรับแก้ตรงนี้: แยกเป็น 2 ช่องเหมือนค่ากะ -->
+                            <div class="p-3 bg-teal-50/40 rounded-xl border border-teal-100/80 space-y-2">
+                                <label class="block text-xs font-bold text-teal-900">ค่าอาหาร (Meal Allowance)</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-[11px] font-semibold text-slate-500 mb-1">จำนวนวันทำงาน (วัน)</label>
+                                        <input type="number" id="mealDays" value="26" min="0" max="31" oninput="calculateAll()"
+                                            class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center font-semibold text-slate-800">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] font-semibold text-slate-500 mb-1">อัตราค่าอาหาร/วัน (บาท)</label>
+                                        <input type="number" id="mealRate" value="40" min="0" oninput="calculateAll()"
+                                            class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center font-semibold text-slate-800">
+                                    </div>
                                 </div>
                             </div>
+
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 mb-1">OIP-รายได้อื่นๆ (บาท)</label>
                                 <input type="number" id="otherIncome" value="0" min="0" oninput="calculateAll()"
@@ -616,8 +626,12 @@
 
             // 5. Allowances
             const diligenceAllowance = getInputValue('diligenceAllowance');
+            
+            // คำนวณค่าอาหาร: จำนวนวัน x อัตราค่าอาหารต่อวัน (เปิดให้แก้ไขได้ทั้ง 2 ช่อง)
             const mealDays = getInputValue('mealDays');
-            const mealAllowance = mealDays * 40; // คำนวณค่าอาหาร: จำนวนวัน x 40 บาท
+            const mealRate = getInputValue('mealRate');
+            const mealAllowance = mealDays * mealRate;
+            
             const otherIncome = getInputValue('otherIncome');
 
             // Total Gross Income
@@ -680,7 +694,7 @@
             document.getElementById('sumOt30Pay').innerText = formatNum(ot30Pay);
 
             document.getElementById('sumDiligence').innerText = formatNum(diligenceAllowance);
-            document.getElementById('sumMealDaysCount').innerText = `(${mealDays} วัน)`;
+            document.getElementById('sumMealDaysCount').innerText = `(${mealDays} วัน @ ${mealRate}฿)`;
             document.getElementById('sumMeal').innerText = formatNum(mealAllowance);
             document.getElementById('sumOtherIncome').innerText = formatNum(otherIncome);
 
@@ -711,6 +725,7 @@
 
             document.getElementById('diligenceAllowance').value = 800;
             document.getElementById('mealDays').value = 26;
+            document.getElementById('mealRate').value = 40;
             document.getElementById('otherIncome').value = 0;
 
             document.getElementById('autoSocialSecurity').checked = true;
