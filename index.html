@@ -129,7 +129,7 @@
                             <div class="relative">
                                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 font-medium">฿</span>
                                 <input type="number" id="baseSalary" value="25000" step="0.01" oninput="calculateAll()"
-                                    class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none font-semibold text-slate-800 transition">
+                                    class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none font-semibold text-red-500 transition">
                             </div>
                         </div>
 
@@ -170,7 +170,7 @@
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-500 mb-1">จำนวนวันกะเช้าที่ทำ OT (ได้ค่ากะ)</label>
                                     <input type="number" id="dayShiftOTDays" value="0" min="0" oninput="calculateAll()"
-                                        class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center font-semibold text-slate-800">
+                                        class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center font-semibold text-red-500">
                                 </div>
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-500 mb-1">อัตราค่ากะเช้า/วัน (บาท)</label>
@@ -192,7 +192,7 @@
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-500 mb-1">จำนวนวันทำงานกะดึกทั้งหมด (วัน)</label>
                                     <input type="number" id="nightShiftDays" value="0" min="0" oninput="calculateAll()"
-                                        class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center font-semibold text-slate-800">
+                                        class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center font-semibold text-red-500">
                                 </div>
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-500 mb-1">อัตราค่ากะดึก/วัน (บาท)</label>
@@ -220,7 +220,7 @@
                             <p class="text-[11px] text-slate-500 mb-2">อัตรา: <span id="ot15RateText" class="font-semibold text-emerald-600">0.00</span> ฿/ชม.</p>
                             <div class="relative">
                                 <input type="number" id="ot15Hours" value="0" min="0" step="0.5" oninput="calculateAll()"
-                                    class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-slate-800 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                    class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-red-500 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                                 <span class="text-xs text-slate-400 absolute right-2.5 top-2.5 font-normal">ชม.</span>
                             </div>
                         </div>
@@ -231,7 +231,7 @@
                             <p class="text-[11px] text-slate-500 mb-2">อัตรา: <span id="ot10RateText" class="font-semibold text-emerald-600">0.00</span> ฿/ชม.</p>
                             <div class="relative">
                                 <input type="number" id="ot10Hours" value="9" min="0" step="0.5" oninput="calculateAll()"
-                                    class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-slate-800 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                    class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-red-500 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                                 <span class="text-xs text-slate-400 absolute right-2.5 top-2.5 font-normal">ชม.</span>
                             </div>
                         </div>
@@ -242,7 +242,7 @@
                             <p class="text-[11px] text-slate-500 mb-2">อัตรา: <span id="ot30RateText" class="font-semibold text-emerald-600">0.00</span> ฿/ชม.</p>
                             <div class="relative">
                                 <input type="number" id="ot30Hours" value="3" min="0" step="0.5" oninput="calculateAll()"
-                                    class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-slate-800 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                    class="w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-center font-bold text-red-500 text-base focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                                 <span class="text-xs text-slate-400 absolute right-2.5 top-2.5 font-normal">ชม.</span>
                             </div>
                         </div>
@@ -264,7 +264,7 @@
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 mb-1">เบี้ยขยัน (บาท)</label>
                                 <input type="number" id="diligenceAllowance" value="800" min="0" oninput="calculateAll()"
-                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
+                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-red-500">
                             </div>
                             
                             <!-- ค่าอาหาร -->
@@ -274,7 +274,7 @@
                                     <div>
                                         <label class="block text-[11px] font-semibold text-slate-500 mb-1">จำนวนวันทำงาน (วัน)</label>
                                         <input type="number" id="mealDays" value="26" min="0" max="31" oninput="calculateAll()"
-                                            class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center font-semibold text-slate-800">
+                                            class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-sm text-center font-semibold text-red-500">
                                     </div>
                                     <div>
                                         <label class="block text-[11px] font-semibold text-slate-500 mb-1">อัตราค่าอาหาร/วัน (บาท)</label>
@@ -287,7 +287,7 @@
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 mb-1">OIP-รายได้อื่นๆ (บาท)</label>
                                 <input type="number" id="otherIncome" value="0" min="0" oninput="calculateAll()"
-                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
+                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-red-500">
                             </div>
                         </div>
                     </div>
@@ -311,12 +311,12 @@
                                     </label>
                                 </div>
                                 <input type="number" id="socialSecurity" value="750" min="0" oninput="calculateAll()" readonly
-                                    class="w-full px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
+                                    class="w-full px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-sm font-semibold text-red-500">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 mb-1">ภาษีหัก ณ ที่จ่าย (บาท)</label>
                                 <input type="number" id="taxDeduction" value="0" min="0" oninput="calculateAll()"
-                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
+                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-red-500">
                             </div>
                             <div>
                                 <div class="flex justify-between items-center mb-1">
@@ -333,7 +333,7 @@
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 mb-1">หักอื่นๆ (บาท)</label>
                                 <input type="number" id="otherDeductions" value="0" min="0" oninput="calculateAll()"
-                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-800">
+                                    class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-red-500">
                             </div>
                         </div>
                     </div>
